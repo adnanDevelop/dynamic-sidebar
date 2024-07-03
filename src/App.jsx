@@ -94,6 +94,7 @@ function App() {
                       : "border-l-transparent"
                   } 
                   hover:border-l-deep-blue cursor-pointer transitions hover:bg-[#F9F9F9] focus:bg-[#F9F9F9]`}
+                onClick={() => setActiveLink(index)}
                 onMouseEnter={() => setActiveLink(index)}
               >
                 {React.createElement(icon, { className: "text-[20px]" })}
