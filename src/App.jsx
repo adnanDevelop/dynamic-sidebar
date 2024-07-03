@@ -6,12 +6,72 @@ import React from "react";
 
 function App() {
   const icons = [
-    { icon: CiGrid41, label: "Dashboard" },
-    { icon: FaRegUser, label: "Profile" },
-    { icon: FaUsers, label: "Users" },
-    { icon: TfiWorld, label: "World" },
-    { icon: FaUserCheck, label: "User Check" },
-    { icon: PiUserListDuotone, label: "User List" },
+    {
+      icon: CiGrid41,
+      label: "Dashboard",
+      links: [
+        { name: "Overview", route: "/dashboard/overview" },
+        { name: "Stats", route: "/dashboard/stats" },
+        { name: "Reports", route: "/dashboard/reports" },
+        { name: "Settings", route: "/dashboard/settings" },
+        { name: "Notifications", route: "/dashboard/notifications" },
+      ],
+    },
+    {
+      icon: FaRegUser,
+      label: "Profile",
+      links: [
+        { name: "My Profile", route: "/profile/my-profile" },
+        { name: "Edit Profile", route: "/profile/edit" },
+        { name: "Preferences", route: "/profile/preferences" },
+        { name: "Privacy", route: "/profile/privacy" },
+        { name: "Security", route: "/profile/security" },
+      ],
+    },
+    {
+      icon: FaUsers,
+      label: "Users",
+      links: [
+        { name: "User List", route: "/users/list" },
+        { name: "User Groups", route: "/users/groups" },
+        { name: "User Roles", route: "/users/roles" },
+        { name: "User Permissions", route: "/users/permissions" },
+        { name: "User Activity", route: "/users/activity" },
+      ],
+    },
+    {
+      icon: TfiWorld,
+      label: "World",
+      links: [
+        { name: "Global Stats", route: "/world/global-stats" },
+        { name: "Regional Data", route: "/world/regional" },
+        { name: "Country Reports", route: "/world/country-reports" },
+        { name: "International News", route: "/world/news" },
+        { name: "Climate", route: "/world/climate" },
+      ],
+    },
+    {
+      icon: FaUserCheck,
+      label: "User Check",
+      links: [
+        { name: "Verification", route: "/user-check/verification" },
+        { name: "Background Check", route: "/user-check/background" },
+        { name: "History", route: "/user-check/history" },
+        { name: "Compliance", route: "/user-check/compliance" },
+        { name: "Approval", route: "/user-check/approval" },
+      ],
+    },
+    {
+      icon: PiUserListDuotone,
+      label: "User List",
+      links: [
+        { name: "All Users", route: "/user-list/all" },
+        { name: "Active Users", route: "/user-list/active" },
+        { name: "Inactive Users", route: "/user-list/inactive" },
+        { name: "Banned Users", route: "/user-list/banned" },
+        { name: "New Users", route: "/user-list/new" },
+      ],
+    },
   ];
 
   return (
