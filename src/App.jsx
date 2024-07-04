@@ -96,7 +96,7 @@ function App() {
                   hover:border-l-deep-blue cursor-pointer transitions hover:bg-[#F9F9F9] focus:bg-[#F9F9F9]`}
                 onClick={() => setActiveLink(index)}
                 onMouseEnter={() => setActiveLink(index)}
-                // onMouseLeave={() => setActiveLink(null)}
+                onMouseLeave={() => setActiveLink(null)}
               >
                 {React.createElement(icon, { className: "text-[20px]" })}
               </button>
@@ -106,8 +106,8 @@ function App() {
       </nav>
 
       <div
-        className={`fixed  top-0 h-full bg-[#F9F9F9] shadow-md transitions ${
-          activeLink !== null ? "w-[220px] left-[65px]" : "w-0 left-0"
+        className={`fixed  top-0 h-full left-[65px] bg-[#F9F9F9] shadow-md transitions ${
+          activeLink !== null ? "w-[220px]" : "w-0"
         }`}
         style={{ overflow: "hidden", transition: "width 0.3s ease-in-out" }}
       >
