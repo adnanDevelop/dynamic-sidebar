@@ -116,7 +116,7 @@ function Sidebar() {
 
         {/* Toolbar */}
         <div
-          className={`fixed top-0 h-full left-[65px] bg-[#F9F9F9] shadow-md rounded-tr-[20px] rounded-br-[20px] ${
+          className={`fixed top-0 h-full left-[65px] bg-[#F9F9F9] shadow-md  ${
             activeLink !== null && icons[activeLink].links ? "w-[220px]" : "w-0"
           }`}
           style={{ overflow: "hidden", transition: "width 0.3s ease-in-out" }}
