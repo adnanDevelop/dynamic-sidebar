@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiGrid41 } from "react-icons/ci";
 import { FaRegUser, FaUsers, FaUserCheck } from "react-icons/fa";
 import { TfiWorld } from "react-icons/tfi";
@@ -6,6 +6,8 @@ import { PiUserListDuotone } from "react-icons/pi";
 
 function App() {
   const [activeLink, setActiveLink] = useState(null);
+  const [hoveringToolbar, setHoveringToolbar] = useState(false);
+  const [hoveringButton, setHoveringButton] = useState(false);
 
   const icons = [
     {
@@ -76,9 +78,16 @@ function App() {
     },
   ];
 
+  // Handle hiding the toolbar when mouse leaves both areas
+  useEffect(() => {
+    if (!hoveringButton && !hoveringToolbar) {
+      setActiveLink(null);
+    }
+  }, [hoveringButton, hoveringToolbar]);
+
   return (
     <main className="relative flex">
-      <nav className="relative h-screen w-[65px] border-r-2 border-r-[#F9F9F9] shadow-md ">
+      <nav className="relative h-screen w-[65px] border-r-2 border-r-[#F9F9F9] shadow-md">
         <h1 className="p-1 mb-4 text-xl font-bold text-center text-deep-blue">
           Alto
         </h1>
@@ -88,15 +97,17 @@ function App() {
               <button
                 aria-label={label}
                 className={`w-[65px] border-r-2 text-[#222222] border-r-[#F9F9F9] h-[55px] grid place-items-center border-l-[3px] 
-                  ${
-                    activeLink === index
-                      ? "border-l-deep-blue bg-[#F9F9F9]"
-                      : "border-l-transparent"
-                  } 
-                  hover:border-l-deep-blue cursor-pointer transitions hover:bg-[#F9F9F9] focus:bg-[#F9F9F9]`}
-                onClick={() => setActiveLink(index)}
-                onMouseEnter={() => setActiveLink(index)}
-                onMouseLeave={() => setActiveLink(null)}
+                ${
+                  activeLink === index
+                    ? "border-l-deep-blue bg-[#F9F9F9]"
+                    : "border-l-transparent"
+                } 
+                hover:border-l-deep-blue cursor-pointer transitions hover:bg-[#F9F9F9] focus:bg-[#F9F9F9]`}
+                onMouseEnter={() => {
+                  setActiveLink(index);
+                  setHoveringButton(true);
+                }}
+                onMouseLeave={() => setHoveringButton(false)}
               >
                 {React.createElement(icon, { className: "text-[20px]" })}
               </button>
@@ -106,10 +117,12 @@ function App() {
       </nav>
 
       <div
-        className={`fixed  top-0 h-full left-[65px] bg-[#F9F9F9] shadow-md transitions ${
+        className={`fixed top-0 h-full left-[65px] bg-[#F9F9F9] shadow-md ${
           activeLink !== null ? "w-[220px]" : "w-0"
         }`}
         style={{ overflow: "hidden", transition: "width 0.3s ease-in-out" }}
+        onMouseEnter={() => setHoveringToolbar(true)}
+        onMouseLeave={() => setHoveringToolbar(false)}
       >
         {activeLink !== null && (
           <>
@@ -132,7 +145,7 @@ function App() {
         )}
       </div>
 
-      <div className="flex items-center justify-center flex-1 w-full h-screen ">
+      <div className="flex items-center justify-center flex-1 w-full h-screen bg-sky-blue">
         <h1 className="text-3xl font-semibold text-white font-poppin">
           Dashboard
         </h1>
