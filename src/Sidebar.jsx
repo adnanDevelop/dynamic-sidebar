@@ -82,7 +82,7 @@ const Sidebar = () => {
           }`}
           style={{ overflow: "hidden", transition: "width 0.3s ease-in-out" }}
           onMouseEnter={() => setHoveringToolbar(true)}
-          onMouseLeave={() => setHoveringToolbar(false)}
+          // onMouseLeave={() => setHoveringToolbar(false)}
         >
           {activeLink !== null && newRoutes[activeLink].links && (
             <>
@@ -158,89 +158,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-{
-  /*
-  
-   <Link
-                        to={link.path}
-                        key={index}
-                        className="flex items-center gap-x-3 px-3 h-[55px] transitions hover:shadow hover:bg-white text-[#222222]"
-                      >
-                        <span>
-                          {React.createElement(link.icon, {
-                            className: 'text-[20px]',
-                          })}
-                        </span>
-                        <Typography
-                          
-                          className="block text-sm font-normal"
-                        >
-                          {link.name}
-                        </Typography>
-                      </Link>
-  */
-}
-
-{
-  /*
-  
-  <nav className="drawer lg:drawer-open w-[260px] z-10 sidebar overflow-hidden">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="flex flex-col items-center justify-center drawer-content">
-        <label
-          htmlFor="my-drawer-2"
-          className="hidden btn btn-primary drawer-button"
-        >
-          Open drawer
-        </label>
-      </div>
-
-      <div className="drawer-side" style={{ position: 'fixed' }}>
-        <label
-          htmlFor="my-drawer-2"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <ul className="min-h-full p-5 !w-[260px] text-white menu bg-deep-blue">
-          <span
-            className="py-1"
-            onClick={() => {
-              navigate('/dashboard');
-            }}
-          >
-            <Typography variant="h4" className="text-white">
-              Logo
-            </Typography>
-            <div className="my-5 border-b-2 border-b-gray-500"></div>
-          </span>
-
-          <div className="relative">
-            <ul className="list-none">
-              {routes.map((route, index) => {
-                // const isActive = location.pathname.startsWith(route.path);
-                const isActive = location.pathname === route.path;
-
-                return (
-                  <li key={index} className="relative capitalize">
-                    <Link
-                      to={route.path}
-                      onClick={() => toggleSubmenu(route.path)}
-                      className={`${isActive ? 'bg-light-white text-deep-blue' : 'bg-transparent text-white'} rounded-md font-[450] font-poppin w-full h-[50px] text-dark-color flex justify-between px-4 mb-1 transitions hover:bg-light-white focus:bg-light-white focus:text-deep-blue hover:text-deep-blue`}
-                    >
-                      <span className="flex items-center gap-2 text-[15px]">
-                        {route.icon && <route.icon className="text-[20px]" />}
-                        <span className="text-sm">{route.name}</span>
-                      </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </ul>
-      </div>
-    </nav>
-  
-  */
-}
