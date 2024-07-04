@@ -5,7 +5,7 @@ import { TfiWorld } from "react-icons/tfi";
 import { PiUserListDuotone } from "react-icons/pi";
 
 function App() {
-  const [activeLink, setActiveLink] = useState(0);
+  const [activeLink, setActiveLink] = useState(null);
 
   const icons = [
     {
@@ -78,11 +78,11 @@ function App() {
 
   return (
     <main className="relative flex">
-      <nav className="relative h-screen w-[65px] border-r-2 border-r-[#F9F9F9] shadow-md">
-        <h1 className="p-1 text-xl font-bold mb-4 text-deep-blue text-center">
+      <nav className="relative h-screen w-[65px] border-r-2 border-r-[#F9F9F9] shadow-md ">
+        <h1 className="p-1 mb-4 text-xl font-bold text-center text-deep-blue">
           Alto
         </h1>
-        <ul className="flex flex-col gap-y-1 me-1">
+        <ul className="flex flex-col me-1">
           {icons.map(({ icon, label }, index) => (
             <li key={index}>
               <button
@@ -96,6 +96,7 @@ function App() {
                   hover:border-l-deep-blue cursor-pointer transitions hover:bg-[#F9F9F9] focus:bg-[#F9F9F9]`}
                 onClick={() => setActiveLink(index)}
                 onMouseEnter={() => setActiveLink(index)}
+                // onMouseLeave={() => setActiveLink(null)}
               >
                 {React.createElement(icon, { className: "text-[20px]" })}
               </button>
@@ -105,13 +106,14 @@ function App() {
       </nav>
 
       <div
-        className={`fixed left-[65px] top-0 h-full bg-[#F9F9F9] w-[220px] shadow-md transitions ${
-          activeLink !== null ? "block" : "hidden"
+        className={`fixed  top-0 h-full bg-[#F9F9F9] shadow-md transitions ${
+          activeLink !== null ? "w-[220px] left-[65px]" : "w-0 left-0"
         }`}
+        style={{ overflow: "hidden", transition: "width 0.3s ease-in-out" }}
       >
         {activeLink !== null && (
           <>
-            <h2 className="p-2 font-medium mb-4 text-lg text-gray-600 text-center">
+            <h2 className="p-2 mb-4 text-lg font-medium text-center text-gray-600">
               {icons[activeLink].label}
             </h2>
             <ul className="px-4">
@@ -119,7 +121,7 @@ function App() {
                 <li key={index} className="mb-2">
                   <a
                     href={link.route}
-                    className="block p-2 bg-white rounded shadow-md hover:bg-gray-200"
+                    className="block p-2 bg-white rounded shadow-md hover:bg-sky-blue hover:text-white transitions"
                   >
                     {link.name}
                   </a>
@@ -128,6 +130,12 @@ function App() {
             </ul>
           </>
         )}
+      </div>
+
+      <div className="flex items-center justify-center flex-1 w-full h-screen ">
+        <h1 className="text-3xl font-semibold text-white font-poppin">
+          Dashboard
+        </h1>
       </div>
     </main>
   );
