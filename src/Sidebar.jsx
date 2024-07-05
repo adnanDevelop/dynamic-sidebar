@@ -2,10 +2,17 @@ import React, { useState, useEffect } from "react";
 import { newRoutes } from "./routes";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import { FaChevronDown } from "react-icons/fa";
+
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState(1);
   const [hoveringButton, setHoveringButton] = useState(false);
   const [hoveringToolbar, setHoveringToolbar] = useState(false);
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const toggleAccordion = (index) => {
+    setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -75,14 +82,14 @@ const Sidebar = () => {
 
         {/* Toolbar */}
         <div
-          className={`fixed top-0 h-full overflow-y-auto left-[65px] bg-[#F9F9F9] shadow-md z-[10] ${
+          className={`absolute top-0 h-full overflow-y-auto left-[65px] bg-[#F9F9F9] shadow-md z-[10] ${
             activeLink !== null && newRoutes[activeLink].links
               ? "w-[220px]"
               : "w-0"
           }`}
           style={{ overflow: "hidden", transition: "width 0.3s ease-in-out" }}
           onMouseEnter={() => setHoveringToolbar(true)}
-          // onMouseLeave={() => setHoveringToolbar(false)}
+          onMouseLeave={() => setHoveringToolbar(false)}
         >
           {activeLink !== null && newRoutes[activeLink].links && (
             <>
@@ -95,39 +102,50 @@ const Sidebar = () => {
                     return (
                       <div
                         key={index}
-                        className="collapse collapse-arrow rounded-0"
+                        className="border-b custom-accordion-item rounded-0" // Add a border for better separation
                       >
-                        <input type="radio" name={"link"} defaultChecked />
                         <button
                           type="button"
-                          className="flex items-center gap-x-3 px-3 h-[55px] transitions hover:shadow bg-transparent focus:!bg-white hover:!bg-white text-[#222222] rounded-0 text-xl font-medium collapse-title "
+                          onClick={() => toggleAccordion(index)}
+                          className={`w-full flex items-center justify-between gap-x-3 px-3 h-[55px] transitions hover:shadow bg-transparent focus:bg-white hover:bg-white text-[#222222] rounded-0 text-xl font-medium`}
                         >
-                          <span>
-                            {React.createElement(link.icon, {
-                              className: "text-[20px]",
-                            })}
+                          <div className="flex items-center gap-x-3">
+                            <span>
+                              {React.createElement(link.icon, {
+                                className: "text-[20px]",
+                              })}
+                            </span>
+                            <p className="block text-sm font-normal">
+                              {link.name}
+                            </p>
+                          </div>
+                          <span
+                            className={`transition-transform duration-300 ${
+                              openIndex === index ? "rotate-[180deg]" : ""
+                            }`}
+                          >
+                            <FaChevronDown className="text-[15px] text-[#222222] " />
                           </span>
-                          <p className="block text-sm font-normal">
-                            {link.name}
-                          </p>
                         </button>
-                        <div className="collapse-content">
-                          {link?.links?.map((link, index) => {
-                            return (
+                        <div
+                          className={`custom-accordion-content overflow-hidden transition-max-height duration-500 ease-in-out ${
+                            openIndex === index ? "max-h-[1000px]" : "max-h-0"
+                          }`}
+                        >
+                          {link.links &&
+                            link.links.map((sublink, subIndex) => (
                               <div
-                                key={index}
-                                className="flex items-center w-full mb-2 ps-7"
+                                className="flex items-center w-full mt-3 mb-2 ps-7"
+                                key={subIndex}
                               >
                                 <Link
-                                  to={link.path}
-                                  className="text-[#222222] text-sm  transitions hover:text-deep-blue"
-                                  key={index}
+                                  to={sublink.path}
+                                  className="text-[#222222] text-sm transitions hover:text-deep-blue hover:translate-x-1.5"
                                 >
-                                  {link.name}
+                                  {sublink.name}
                                 </Link>
                               </div>
-                            );
-                          })}
+                            ))}
                         </div>
                       </div>
                     );
